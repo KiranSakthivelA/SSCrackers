@@ -20,7 +20,7 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - SS Crackers</title>
+    <title>Admin CMS Login - SS Crackers</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
     <style>
@@ -203,8 +203,8 @@ if (isset($_POST['login'])) {
             <div class="logo-icon">
                 <i class="fas fa-fire"></i>
             </div>
-            <h2>SS Admin</h2>
-            <div class="subtitle">Enter your credentials to access the portal</div>
+            <h2>SS Admin CMS</h2>
+            <div class="subtitle">Enter your credentials to access the CMS portal</div>
             
             <?php if(isset($error)) echo "<div class='error'><i class='fas fa-exclamation-circle'></i> $error</div>"; ?>
             
