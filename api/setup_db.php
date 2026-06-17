@@ -41,5 +41,23 @@ if ($conn->query($sql_items) === TRUE) {
     echo "<p style='color:red;'>Error creating table 'order_items': " . $conn->error . "</p>";
 }
 
+// 3. Import products from database.sql
+$sql_file = __DIR__ . '/../database.sql';
+if (file_exists($sql_file)) {
+    $sql_content = file_get_contents($sql_file);
+    if ($conn->multi_query($sql_content)) {
+        do {
+            if ($result = $conn->store_result()) {
+                $result->free();
+            }
+        } while ($conn->more_results() && $conn->next_result());
+        echo "<p style='color:green;'>Table 'products' created and populated from database.sql successfully.</p>";
+    } else {
+        echo "<p style='color:red;'>Error importing database.sql: " . $conn->error . "</p>";
+    }
+} else {
+    echo "<p style='color:orange;'>Warning: database.sql not found. Products table was not created automatically.</p>";
+}
+
 echo "<h3>Setup Complete! You can now safely delete this file or navigate away.</h3>";
 ?>
