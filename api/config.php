@@ -3,9 +3,9 @@
 // Update these details with your MilesWeb database credentials
 
 $db_host = 'localhost';
-$db_user = 'root'; // e.g., 'your_cpanel_username_user'
-$db_pass = ''; // your database password
-$db_name = 'ss_crackers'; // e.g., 'your_cpanel_username_db'
+$db_user = 'codevibe1_admin'; 
+$db_pass = 'YOUR_PASSWORD_HERE'; // Please enter your DB password before uploading!
+$db_name = 'codevibe1_sscrackerstest'; 
 
 // Connect to MySQL
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
