@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SS Crackers | Sivakasi Crackers Online | Best Price Crackers Tamil Nadu</title>
+  <meta name="description" content="SS Crackers - Buy Sivakasi crackers online at best factory price. Huge 80% discount on all fireworks. Free home delivery across Tamil Nadu. Quality guaranteed crackers for Diwali and all festivals.">
+  <meta name="keywords" content="SS Crackers, Sivakasi crackers, crackers online Tamil Nadu, Diwali crackers, buy crackers online, fireworks Tamil Nadu, crackers price list, best crackers">
+  <meta property="og:title" content="SS Crackers | Best Sivakasi Crackers at Factory Price">
+  <meta property="og:description" content="Buy Sivakasi crackers online with upto 80% discount. Quality fireworks for Diwali and all festivals. Free delivery across Tamil Nadu.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="images/logo.png" type="image/png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css?v=23">
+  <link rel="stylesheet" href="css/animate.css?v=23">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar" id="announcementBar">
+    <div class="announcement-content">
+      <span>MEGA SALE! Upto <strong>80% OFF</strong> on all Sivakasi Crackers! Free Delivery above ₹3000 &nbsp;|&nbsp; Call: <strong>+91 98765 43210</strong></span>
+    </div>
+    <button class="announcement-close" onclick="document.getElementById('announcementBar').style.display='none'">×</button>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <div class="header-inner">
+        <!-- Logo -->
+        <div class="logo-wrap">
+          <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="SS Crackers Logo" class="logo-img">
+            <div class="logo-text">
+              <span class="logo-name">SS Crackers</span>
+              <span class="logo-sub">Sivakasi Factory Price</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="header-search">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search crackers... e.g. sparklers, rockets" autocomplete="off">
+            <button class="search-btn" onclick="doSearch()">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <a href="tel:+919876543210" class="call-btn">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <span class="call-label">Call Us Now</span>
+              <span class="call-num">+91 98765 43210</span>
+            </div>
+          </a>
+          <!-- Cart Button -->
+          <button class="cart-header-btn" id="cartHeaderBtn" onclick="openCart()">
+            <i class="fas fa-shopping-basket"></i>
+            <span>My Cart</span>
+            <span class="cart-count-badge" id="cartCountBadge" style="display:none">0</span>
+          </button>
+        </div>
+
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+      <div class="container">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#categories" class="nav-link">Categories</a></li>
+          <li><a href="#products" class="nav-link">Products</a></li>
+          <li><a href="#pricelist" class="nav-link">Price List</a></li>
+          <li><a href="#offers" class="nav-link">Offers</a></li>
+          <li><a href="#safety" class="nav-link">Safety Tips</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section class="hero-section" id="home">
+    <div class="hero-slider">
+      <!-- Slide 1 -->
+      <div class="hero-slide active">
+        <div class="hero-bg" style="background-image: url('images/hero_banner.png')"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-badge animate-fadeInUp">Sivakasi Factory Price</div>
+            <h1 class="hero-title animate-fadeInUp delay-1">
+              Celebrate Every Festival with<br>
+              <span class="hero-highlight">SS Crackers!</span>
+            </h1>
+            <p class="hero-subtitle animate-fadeInUp delay-2">
+              Tamil Nadu's Most Trusted Online Crackers Store<br>
+              <strong>Upto 80% OFF</strong> &nbsp;|&nbsp; 150+ Products &nbsp;|&nbsp; Safe & Quality Guaranteed
+            </p>
+            <div class="hero-btns animate-fadeInUp delay-3">
+              <a href="#products" class="btn btn-primary btn-lg">
+                <i class="fas fa-shopping-basket"></i> Shop Now
+              </a>
+              <a href="#pricelist" class="btn btn-outline btn-lg">
+                <i class="fas fa-list"></i> View Price List
+              </a>
+            </div>
+            <div class="hero-features animate-fadeInUp delay-4">
+              <div class="hero-feat"><i class="fas fa-truck"></i> Free Delivery</div>
+              <div class="hero-feat"><i class="fas fa-shield-alt"></i> Quality Assured</div>
+              <div class="hero-feat"><i class="fas fa-tag"></i> Best Price</div>
+              <div class="hero-feat"><i class="fas fa-headset"></i> 24/7 Support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===================== STATS SECTION ===================== -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-boxes"></i></div>
+          <div class="stat-num" data-target="150">0</div>
+          <div class="stat-label">Products Available</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-num" data-target="10000">0</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-percentage"></i></div>
+          <div class="stat-num" data-target="80">0</div>
+          <div class="stat-label">% Discount Offered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+          <div class="stat-num" data-target="15">0</div>
+          <div class="stat-label">Years of Experience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CATEGORIES SECTION ===================== -->
+  <section class="categories-section section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Shop By Category</span>
+        <h2 class="section-title">Explore Our Collections</h2>
+        <p class="section-subtitle">From classic sparklers to spectacular aerial shots – we have everything!</p>
+      </div>
+
+      <div class="categories-grid">
+        <div class="cat-card" onclick="filterCategory('bijili')">
+          <div class="cat-icon-wrap" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3);">
+            <i class="fas fa-bolt cat-icon-fa"></i>
+          </div>
+          <h3>Bijili & Strings</h3>
+          <p>Classic string crackers</p>
+          <span class="cat-count">18 Products</span>
+        </div>
+
+        <div class="cat-card" onclick="filterCategory('bombs')">
+          <div class="cat-icon-wrap" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3);">
+            <i class="fas fa-bomb cat-icon-fa"></i>
+          </div>
+          <h3>Bombs</h3>
+          <p>Loud sound bombs and classic strings</p>
+          <span class="cat-count">13 Products</span>
+        </div>
+
+        <div class="cat-card" onclick="filterCategory('sparkler')">
+          <div class="cat-icon-wrap" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3);">
+            <i class="fas fa-star cat-icon-fa"></i>
+          </div>
+          <h3>Sparklers</h3>
+          <p>Electric & colour sparklers for all ages</p>
+          <span class="cat-count">16 Products</span>
+        </div>
+
+        <div class="cat-card" onclick="filterCategory('flower')">
+          <div class="cat-icon-wrap" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3);">
+            <i class="fas fa-fire cat-icon-fa"></i>
+          </div>
+          <h3>Flower Pots</h3>
+          <p>Beautiful sparkling flower pot crackers</p>
+          <span class="cat-count">5 Products</span>
+        </div>
+
+        <div class="cat-card" onclick="filterCategory('chakkra')">
+          <div class="cat-icon-wrap" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3);">
+            <i class="fas fa-circle-notch cat-icon-fa"></i>
+          </div>
+          <h3>Ground Chakkra</h3>
+          <p>Spinning wheel crackers with colours</p>
+          <span class="cat-count">8 Products</span>
+        </div>
+
+        <div class="cat-card" onclick="filterCategory('aerial')">
+          <div class="cat-icon-wrap" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3);">
+            <i class="fas fa-rocket cat-icon-fa"></i>
+          </div>
+          <h3>Aerial & Sky Shot</h3>
+          <p>Multi-shot aerial fireworks displays</p>
+          <span class="cat-count">11 Products</span>
+        </div>
+
+        <div class="cat-card" onclick="filterCategory('fancy')">
+          <div class="cat-icon-wrap" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3);">
+            <i class="fas fa-magic cat-icon-fa"></i>
+          </div>
+          <h3>Fancy & Kids</h3>
+          <p>Safe & fun crackers for children</p>
+          <span class="cat-count">20+ Products</span>
+        </div>
+
+        <div class="cat-card" onclick="filterCategory('rocket')">
+          <div class="cat-icon-wrap" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3);">
+            <i class="fas fa-arrow-up cat-icon-fa"></i>
+          </div>
+          <h3>Rockets</h3>
+          <p>High-flying rockets and whistle bombs</p>
+          <span class="cat-count">3 Products</span>
+        </div>
+
+        <div class="cat-card" onclick="filterCategory('all')">
+          <div class="cat-icon-wrap" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3);">
+            <i class="fas fa-th-large cat-icon-fa"></i>
+          </div>
+          <h3>View All</h3>
+          <p>Browse our complete collection</p>
+          <span class="cat-count">150+ Products</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OFFER BANNER ===================== -->
+  <section class="offer-banner-section" id="offers">
+    <div class="container">
+      <div class="offer-banner">
+        <div class="offer-banner-content">
+          <h2><span class="offer-tag">Limited Time</span> Get <span class="offer-percent">80% OFF</span></h2>
+          <div class="offer-timer">
+            <div class="timer-box"><span id="timerDays">00</span><small>D</small></div><div class="timer-sep">:</div>
+            <div class="timer-box"><span id="timerHrs">00</span><small>H</small></div><div class="timer-sep">:</div>
+            <div class="timer-box"><span id="timerMins">00</span><small>M</small></div><div class="timer-sep">:</div>
+            <div class="timer-box"><span id="timerSecs">00</span><small>S</small></div>
+          </div>
+          <a href="#products" class="btn btn-primary">Shop Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRODUCTS / PRICE LIST SECTION ===================== -->
+  <section class="products-section section" id="products">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Our Products</span>
+        <h2 class="section-title">Complete Price List</h2>
+        <p class="section-subtitle">Factory direct prices with <strong>80% discount</strong> on all items – Best rates in Tamil Nadu!</p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterCategory('all')" id="filter-all">All Products</button>
+        <button class="filter-btn" onclick="filterCategory('bijili')" id="filter-bijili">Bijili & Strings</button>
+        <button class="filter-btn" onclick="filterCategory('bombs')" id="filter-bombs">Bombs</button>
+        <button class="filter-btn" onclick="filterCategory('sparkler')" id="filter-sparkler">Sparklers</button>
+        <button class="filter-btn" onclick="filterCategory('flower')" id="filter-flower">Flower Pots</button>
+        <button class="filter-btn" onclick="filterCategory('chakkra')" id="filter-chakkra">Chakkra</button>
+        <button class="filter-btn" onclick="filterCategory('aerial')" id="filter-aerial">Aerial Shots</button>
+        <button class="filter-btn" onclick="filterCategory('fancy')" id="filter-fancy">Fancy & Kids</button>
+        <button class="filter-btn" onclick="filterCategory('rocket')" id="filter-rocket">Rockets</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Price List Table Section -->
+      <div id="pricelist" class="pricelist-section">
+        <div class="pricelist-header">
+          <h3><i class="fas fa-list-alt"></i> Complete Price List – SS Crackers 2025</h3>
+          <button class="btn btn-primary" onclick="printPriceList()">
+            <i class="fas fa-print"></i> Print Price List
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table class="pricelist-table" id="priceTable">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Product Name</th>
+                <th>MRP (₹)</th>
+                <th>Our Price (₹) <span class="discount-badge">80% OFF</span></th>
+                <th>Qty</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="priceTableBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHY CHOOSE US ===================== -->
+  <section class="why-section section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Why Choose Us</span>
+        <h2 class="section-title">Why SS Crackers?</h2>
+        <p class="section-subtitle">We are Tamil Nadu's most trusted crackers supplier – here's why thousands of families choose us</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-industry"></i></div>
+          <h3>Direct from Factory</h3>
+          <p>We source directly from Sivakasi factories, ensuring the best quality at factory-direct prices. No middlemen, maximum savings!</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-certificate"></i></div>
+          <h3>100% Quality Assured</h3>
+          <p>All our crackers are certified by PESO (Petroleum Explosive Safety Organisation) and meet all safety standards.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-truck"></i></div>
+          <h3>Pan Tamil Nadu Delivery</h3>
+          <p>We deliver safely to all districts of Tamil Nadu. Special packaging ensures your crackers arrive in perfect condition.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-percentage"></i></div>
+          <h3>Upto 80% Discount</h3>
+          <p>Enjoy massive discounts on all products. The more you buy, the more you save! Special bulk order discounts available.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-headset"></i></div>
+          <h3>24/7 Customer Support</h3>
+          <p>Our friendly customer service team is available round the clock via phone and email to help you with any query.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Safe Packaging</h3>
+          <p>Every order is carefully packed in compliance with transport regulations for your safety and satisfaction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SAFETY TIPS ===================== -->
+  <section class="safety-section section" id="safety">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Stay Safe</span>
+        <h2 class="section-title">Safety Tips for Crackers</h2>
+        <p class="section-subtitle">Celebrate responsibly – follow these important safety guidelines</p>
+      </div>
+      <div class="safety-grid">
+        <div class="safety-card dos">
+          <div class="safety-header"><i class="fas fa-check-circle"></i> Do's</div>
+          <ul>
+            <li><i class="fas fa-check"></i> Always burst crackers in open areas</li>
+            <li><i class="fas fa-check"></i> Keep a bucket of water or sand nearby</li>
+            <li><i class="fas fa-check"></i> Read instructions before use</li>
+            <li><i class="fas fa-check"></i> Keep children under adult supervision</li>
+            <li><i class="fas fa-check"></i> Wear cotton clothes while bursting</li>
+            <li><i class="fas fa-check"></i> Keep unused crackers in a safe place</li>
+            <li><i class="fas fa-check"></i> Use incense stick to light crackers</li>
+          </ul>
+        </div>
+        <div class="safety-card donts">
+          <div class="safety-header"><i class="fas fa-times-circle"></i> Don'ts</div>
+          <ul>
+            <li><i class="fas fa-times"></i> Don't burst crackers in crowded areas</li>
+            <li><i class="fas fa-times"></i> Don't hold crackers in hand while lighting</li>
+            <li><i class="fas fa-times"></i> Don't burst crackers near vehicles</li>
+            <li><i class="fas fa-times"></i> Don't allow children to burst alone</li>
+            <li><i class="fas fa-times"></i> Don't re-light failed crackers</li>
+            <li><i class="fas fa-times"></i> Don't burst crackers near hospitals</li>
+            <li><i class="fas fa-times"></i> Don't carry loose crackers in pockets</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT SECTION ===================== -->
+  <section class="contact-section section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Get In Touch</span>
+        <h2 class="section-title">Contact & Order</h2>
+        <p class="section-subtitle">Place your order now and get the best crackers delivered to your doorstep!</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>SS Crackers</h3>
+          <p class="contact-tagline">Tamil Nadu's Best Sivakasi Crackers</p>
+
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <strong>Address</strong>
+                <p>Sivakasi, Virudhunagar District,<br>Tamil Nadu – 626189</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+              <div>
+                <strong>Phone</strong>
+                <p><a href="tel:+919876543210">+91 98765 43210</a><br>
+                <a href="tel:+919876543211">+91 98765 43211</a></p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <strong>Email</strong>
+                <p><a href="mailto:sscrackers@gmail.com">sscrackers@gmail.com</a></p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-clock"></i></div>
+              <div>
+                <strong>Business Hours</strong>
+                <p>Monday – Sunday: 8:00 AM – 9:00 PM</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-social">
+            <a href="#" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-btn ig"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-btn yt"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap">
+          <form class="contact-form" onsubmit="submitContactForm(event)">
+            <h3>Send Us a Message</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name *</label>
+                <input type="text" id="fname" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label>Phone Number *</label>
+                <input type="tel" id="fphone" placeholder="+91 XXXXX XXXXX" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="femail" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label>District / City *</label>
+              <input type="text" id="fcity" placeholder="Your city in Tamil Nadu" required>
+            </div>
+            <div class="form-group">
+              <label>Message / Order Details *</label>
+              <textarea id="fmessage" rows="4" placeholder="Tell us what you need – product names, quantity, etc." required></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-full">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Brand -->
+          <div class="footer-col footer-brand">
+            <div class="footer-logo">
+              <img src="images/logo.png" alt="SS Crackers" height="60">
+              <span>SS Crackers</span>
+            </div>
+            <p>Tamil Nadu's most trusted online crackers store. Delivering happiness with quality Sivakasi crackers since 2010.</p>
+            <div class="footer-social">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#categories">Categories</a></li>
+              <li><a href="#products">Products</a></li>
+              <li><a href="#pricelist">Price List</a></li>
+              <li><a href="#offers">Offers</a></li>
+              <li><a href="#safety">Safety Tips</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Categories -->
+          <div class="footer-col">
+            <h4>Product Categories</h4>
+            <ul>
+              <li><a href="#" onclick="filterCategory('bijili')">Bijili & Strings</a></li>
+              <li><a href="#" onclick="filterCategory('bombs')">Bombs</a></li>
+              <li><a href="#" onclick="filterCategory('sparkler')">Sparklers</a></li>
+              <li><a href="#" onclick="filterCategory('flower')">Flower Pots</a></li>
+              <li><a href="#" onclick="filterCategory('chakkra')">Ground Chakkra</a></li>
+              <li><a href="#" onclick="filterCategory('aerial')">Aerial Sky Shot</a></li>
+              <li><a href="#" onclick="filterCategory('fancy')">Fancy Items</a></li>
+              <li><a href="#" onclick="filterCategory('rocket')">Rockets</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <div class="footer-contact">
+              <p><i class="fas fa-map-marker-alt"></i> Sivakasi, Tamil Nadu – 626189</p>
+              <p><i class="fas fa-phone-alt"></i> <a href="tel:+919876543210">+91 98765 43210</a></p>
+              <p><i class="fas fa-envelope"></i> <a href="mailto:sscrackers@gmail.com">sscrackers@gmail.com</a></p>
+              <p><i class="fas fa-clock"></i> Mon–Sun: 8AM – 9PM</p>
+            </div>
+            <div class="footer-payment">
+              <span>Payments:</span>
+              <i class="fab fa-google-pay" title="Google Pay"></i>
+              <i class="fas fa-qrcode" title="UPI"></i>
+              <i class="fas fa-money-bill-wave" title="Cash"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2025 SS Crackers, Sivakasi. All Rights Reserved. | Designed with care for Tamil Nadu Customers</p>
+        <p class="footer-disclaimer">Crackers must be used as per government regulations. Please burst crackers responsibly.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- ===================== CART SIDEBAR ===================== -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-sidebar-header">
+      <div class="cart-sidebar-title">
+        <i class="fas fa-shopping-basket"></i>
+        <span>My Cart</span>
+        <span class="cart-item-count" id="cartItemCount">0 items</span>
+      </div>
+      <button class="cart-close-btn" onclick="closeCart()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-body" id="cartBody">
+      <!-- Cart items rendered by JS -->
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total-row">
+        <span>Total Amount</span>
+        <span class="cart-total-amt" id="cartTotalAmt">₹0</span>
+      </div>
+      <button class="btn btn-proceed" onclick="openCheckout()">
+        <i class="fas fa-arrow-right"></i> Proceed to Order
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== CHECKOUT MODAL ===================== -->
+  <div class="checkout-overlay" id="checkoutOverlay">
+    <div class="checkout-modal" id="checkoutModal">
+
+      <!-- Step indicators -->
+      <div class="checkout-steps">
+        <div class="step active" id="step-ind-1">
+          <div class="step-num">1</div>
+          <span>Your Details</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" id="step-ind-2">
+          <div class="step-num">2</div>
+          <span>Order Summary</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" id="step-ind-3">
+          <div class="step-num">3</div>
+          <span>Confirmation</span>
+        </div>
+      </div>
+
+      <button class="checkout-close" onclick="closeCheckout()"><i class="fas fa-times"></i></button>
+
+      <!-- STEP 1: Customer Info -->
+      <div class="checkout-step" id="checkoutStep1">
+        <h2 class="checkout-heading">Enter Your Details</h2>
+        <p class="checkout-sub">Please fill in your details to place the order</p>
+        <form id="checkoutForm" onsubmit="goToStep2(event)">
+          <div class="co-form-row">
+            <div class="co-form-group">
+              <label>Full Name <span class="req">*</span></label>
+              <input type="text" id="co_name" placeholder="Your full name" required>
+            </div>
+            <div class="co-form-group">
+              <label>Phone Number <span class="req">*</span></label>
+              <input type="tel" id="co_phone" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+          </div>
+          <div class="co-form-group">
+            <label>Email Address <span class="opt">(Optional)</span></label>
+            <input type="email" id="co_email" placeholder="your@email.com">
+          </div>
+          <div class="co-form-group">
+            <label>Full Address <span class="req">*</span></label>
+            <textarea id="co_address" rows="2" placeholder="House No, Street, Area..." required></textarea>
+          </div>
+          <div class="co-form-row">
+            <div class="co-form-group">
+              <label>City / District <span class="req">*</span></label>
+              <input type="text" id="co_city" placeholder="City name" required>
+            </div>
+            <div class="co-form-group">
+              <label>Pincode <span class="req">*</span></label>
+              <input type="text" id="co_pin" placeholder="6-digit pincode" pattern="[0-9]{6}" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-proceed btn-full">
+            View Order Summary <i class="fas fa-arrow-right"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- STEP 2: Order Summary -->
+      <div class="checkout-step" id="checkoutStep2" style="display:none">
+        <h2 class="checkout-heading">Order Summary</h2>
+        <p class="checkout-sub">Please review your order before confirming</p>
+        <div class="order-customer-info" id="orderCustomerInfo"></div>
+        <div class="order-items-table" id="orderItemsTable"></div>
+        <div class="order-grand-total" id="orderGrandTotal"></div>
+        <div class="co-btn-row">
+          <button class="btn btn-back" onclick="goBackStep1()">
+            <i class="fas fa-arrow-left"></i> Edit Details
+          </button>
+          <button class="btn btn-proceed" onclick="confirmOrder()">
+            <i class="fas fa-check"></i> Confirm Booking
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Thank You -->
+      <div class="checkout-step" id="checkoutStep3" style="display:none">
+        <div class="thankyou-wrap">
+          <div class="thankyou-icon"><i class="fas fa-check-circle"></i></div>
+          <h2 class="thankyou-title">Booking Confirmed!</h2>
+          <p class="thankyou-msg" id="thankyouMsg">Thank you! Your order has been placed successfully. Our team will contact you shortly to confirm delivery details.</p>
+          <div class="thankyou-actions">
+            <button class="btn btn-download" onclick="downloadCrackerList()">
+              <i class="fas fa-download"></i> Download Your Cracker List
+            </button>
+            <button class="btn btn-outline-warm" onclick="closeCheckout(); clearCart();">
+              Continue Shopping
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Success Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Main JS -->
+  <script src="js/main.js?v=23"></script>
+  <script src="js/animate.js?v=23"></script>
+</body>
+</html>
