@@ -7,12 +7,16 @@ $db_user = 'codevibe1_admin';
 $db_pass = 'YOUR_PASSWORD_HERE'; // Please enter your DB password before uploading!
 $db_name = 'codevibe1_sscrackerstest'; 
 
-// Connect to MySQL
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(["error" => "Database connection failed: " . $conn->connect_error]));
+// Connect to MySQL (wrapped in try-catch for PHP 8.1+ exception handling)
+try {
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    
+    // Check connection (for older PHP versions)
+    if ($conn->connect_error) {
+        die(json_encode(["error" => "Database connection failed: " . $conn->connect_error]));
+    }
+} catch (mysqli_sql_exception $e) {
+    die("<h2>Database Connection Error</h2><p style='color:red;'>Access Denied. Please check your database username, password, and database name in <b>api/config.php</b>.</p><p>Error details: " . $e->getMessage() . "</p>");
 }
 
 // Ensure UTF-8 encoding
