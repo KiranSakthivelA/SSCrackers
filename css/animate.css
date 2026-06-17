@@ -122,7 +122,7 @@
 }
 
 /* ========== LIQUID RIPPLE ON BUTTONS ========== */
-.btn, .filter-btn, .cart-header-btn, .btn-proceed, .btn-gold {
+.btn, .filter-btn, .btn-proceed, .btn-gold {
   position: relative;
   overflow: hidden;
 }

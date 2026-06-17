@@ -113,8 +113,13 @@ function renderProducts(cat) {
           <span class="product-mrp">₹${p.mrp.toLocaleString('en-IN')}</span>
           <span class="product-discount">${discount}% OFF</span>
         </div>
-        <div class="product-actions">
-          <button class="btn-add-cart ${inCart ? 'added' : ''}" id="add-btn-${p.id}" onclick="addToCart(${p.id}, this)">
+        <div class="product-actions" style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="qty-control-sm" style="width: 100%; justify-content: space-between; border-color: rgba(212,175,55,0.3);">
+            <button type="button" onclick="const q=document.getElementById('grid-qty-${p.id}'); if(q.value>1) q.value--">-</button>
+            <input type="number" id="grid-qty-${p.id}" value="1" min="1" readonly style="background:transparent; color:var(--text-dark);">
+            <button type="button" onclick="document.getElementById('grid-qty-${p.id}').value++">+</button>
+          </div>
+          <button class="btn-add-cart ${inCart ? 'added' : ''}" style="width: 100%; justify-content: center;" id="add-btn-${p.id}" onclick="addToCart(${p.id}, this, null, parseInt(document.getElementById('grid-qty-${p.id}').value, 10) || 1)">
             <i class="fas ${inCart ? 'fa-check' : 'fa-plus'}"></i>
             ${inCart ? 'Added to Cart' : 'Add to Cart'}
           </button>
@@ -159,21 +164,29 @@ function renderPriceTable(data) {
   items.forEach((p, i) => {
     const discount = Math.round(((p.mrp - p.price) / p.mrp) * 100);
     const inCart = cartItems.has(p.id);
+    
+    const iconClass = getCategoryIcon(p.category);
+    const imgHtml = p.image_url 
+      ? `<img src="${p.image_url}" alt="${p.name}" style="width:36px; height:36px; object-fit:cover; border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);">`
+      : `<i class="fas ${iconClass}" style="font-size:20px;color:var(--emerald);opacity:0.8;"></i>`;
+
     const tr = document.createElement('tr');
     tr.id = `table-row-${p.id}`;
+    tr.className = 'reveal';
     tr.innerHTML = `
       <td>${i + 1}</td>
-      <td style="font-weight:700; color:var(--text-dark);">${p.name}</td>
-      <td style="text-decoration:line-through; color:var(--text-light);">₹${p.mrp.toLocaleString('en-IN')}</td>
-      <td style="font-weight:800; color:#004225; font-size:1.05rem;">₹${p.price.toLocaleString('en-IN')}</td>
-      <td>
-        <div class="qty-control-sm">
+      <td style="text-align:center;">${imgHtml}</td>
+      <td style="text-align: center; font-weight:700; color:var(--text-dark);">${p.name}</td>
+      <td style="text-align: center; text-decoration:line-through; color:var(--text-light);">₹${p.mrp.toLocaleString('en-IN')}</td>
+      <td style="text-align: center; font-weight:800; color:#004225; font-size:1.05rem;">₹${p.price.toLocaleString('en-IN')}</td>
+      <td style="text-align: center;">
+        <div class="qty-control-sm" style="margin: 0 auto;">
           <button type="button" onclick="const q=document.getElementById('table-qty-${p.id}'); if(q.value>1) q.value--">-</button>
           <input type="number" id="table-qty-${p.id}" value="1" min="1">
           <button type="button" onclick="document.getElementById('table-qty-${p.id}').value++">+</button>
         </div>
       </td>
-      <td>
+      <td style="text-align: center;">
         <button class="table-add-cart-btn ${inCart ? 'added' : ''}" id="table-btn-${p.id}" onclick="addToCart(${p.id}, null, this, parseInt(document.getElementById('table-qty-${p.id}').value, 10) || 1)">
           <i class="fas ${inCart ? 'fa-check' : 'fa-plus'}"></i>
           ${inCart ? 'Added' : 'Add to Cart'}
@@ -182,6 +195,12 @@ function renderPriceTable(data) {
     `;
     tbody.appendChild(tr);
   });
+  
+  setTimeout(() => {
+    tbody.querySelectorAll('.reveal').forEach((el, index) => {
+      setTimeout(() => el.classList.add('visible'), index * 15);
+    });
+  }, 50);
 }
 
 // ================================================
@@ -368,6 +387,18 @@ function updateCartUI() {
   if (cartFooter) {
     cartFooter.style.display = count > 0 ? 'block' : 'none';
   }
+
+  // Bottom Cart Summary Logic
+  const bcs = document.getElementById('bottomCartSummary');
+  if (bcs) {
+    if (count > 0) {
+      document.getElementById('bcsCount').textContent = count + (count === 1 ? ' Item' : ' Items');
+      document.getElementById('bcsTotal').textContent = '₹' + total.toLocaleString('en-IN');
+      bcs.classList.add('visible');
+    } else {
+      bcs.classList.remove('visible');
+    }
+  }
 }
 
 function renderCartBody() {
@@ -376,10 +407,10 @@ function renderCartBody() {
 
   if (cartItems.size === 0) {
     body.innerHTML = `
-      <div class="cart-empty">
-        <i class="fas fa-shopping-basket"></i>
-        <p>Your cart is empty.<br>Add crackers to get started!</p>
-        <button class="btn-outline-warm" onclick="closeCart()" style="margin-top:8px;">
+      <div class="cart-empty" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 300px; gap: 15px;">
+        <i class="fas fa-shopping-basket" style="font-size: 3rem; color: var(--gold); opacity: 0.5;"></i>
+        <p style="color: var(--text-light); font-size: 1.1rem;">Your cart is empty.<br>Add crackers to get started!</p>
+        <button class="btn-outline-warm" onclick="closeCart()" style="margin-top: 5px;">
           Browse Products
         </button>
       </div>`;
@@ -400,14 +431,16 @@ function renderCartBody() {
         <div class="cart-item-unit-price">₹${p.price.toLocaleString('en-IN')} per unit</div>
         <div class="cart-item-price">₹${(p.price * qty).toLocaleString('en-IN')}</div>
       </div>
-      <div class="cart-qty-ctrl">
-        <button onclick="changeCartQty(${p.id}, -1)">−</button>
-        <div class="cart-qty-val">${qty}</div>
-        <button onclick="changeCartQty(${p.id}, +1)">+</button>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="cart-qty-ctrl">
+          <button onclick="changeCartQty(${p.id}, -1)">−</button>
+          <div class="cart-qty-val">${qty}</div>
+          <button onclick="changeCartQty(${p.id}, +1)">+</button>
+        </div>
+        <button class="cart-remove-btn" onclick="removeFromCart(${p.id})" title="Remove">
+          <i class="fas fa-trash-alt"></i>
+        </button>
       </div>
-      <button class="cart-remove-btn" onclick="removeFromCart(${p.id})" title="Remove">
-        <i class="fas fa-trash-alt"></i>
-      </button>
     `;
     body.appendChild(item);
   });
@@ -459,6 +492,17 @@ function showStep(n) {
       if (i === n) ind.classList.add('active');
     }
   });
+  
+  [1, 2].forEach(i => {
+    const line = document.getElementById(`step-line-${i}`);
+    if (line) {
+      if (n > i) {
+        line.classList.add('active');
+      } else {
+        line.classList.remove('active');
+      }
+    }
+  });
 }
 
 function goToStep2(e) {
@@ -487,13 +531,20 @@ function goToStep2(e) {
   cartItems.forEach(({ product: p, qty }) => {
     const lineTotal = p.price * qty;
     grandTotal += lineTotal;
+    
+    const iconClass = getCategoryIcon(p.category);
+    const imgHtml = p.image_url 
+      ? `<img src="${p.image_url}" alt="${p.name}" style="width:40px; height:40px; object-fit:cover; border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);">`
+      : `<i class="fas ${iconClass}" style="font-size:24px;color:var(--primary);opacity:0.8;"></i>`;
+
     rows += `
       <tr>
         <td>${sno++}</td>
+        <td style="text-align:center;">${imgHtml}</td>
         <td>${p.name}</td>
         <td>₹${p.price.toLocaleString('en-IN')}</td>
         <td>${qty}</td>
-        <td>₹${lineTotal.toLocaleString('en-IN')}</td>
+        <td><strong>₹${lineTotal.toLocaleString('en-IN')}</strong></td>
       </tr>`;
   });
 
@@ -502,6 +553,7 @@ function goToStep2(e) {
       <thead>
         <tr>
           <th>#</th>
+          <th style="text-align:center;">Image</th>
           <th>Product</th>
           <th>Price</th>
           <th>Qty</th>
@@ -534,12 +586,29 @@ function confirmOrder() {
   confirmedOrder = {
     customer: { name, phone, email, address, city, pin },
     items: Array.from(cartItems.values()).map(({ product: p, qty }) => ({
-      id: p.id, name: p.name, category: p.category,
+      id: p.id, name: p.name, category: p.category, image_url: p.image_url,
       price: p.price, mrp: p.mrp, qty
     })),
     total: getCartTotal(),
     date: new Date().toLocaleString('en-IN')
   };
+
+  // Send to backend
+  fetch('api/place_order.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(confirmedOrder)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success) {
+      console.log("Order saved to DB: ", data.order_number);
+      confirmedOrder.order_number = data.order_number; // Save it so the download can use it
+    } else {
+      console.error("Order save failed: ", data.message);
+    }
+  })
+  .catch(err => console.error("Error connecting to backend: ", err));
 
   document.getElementById('thankyouMsg').textContent =
     `Thank you, ${name}! Your order has been placed successfully. Our team will call you on ${phone} to confirm the delivery details.`;
@@ -556,23 +625,23 @@ function downloadCrackerList() {
 
   let itemRows = '';
   items.forEach((item, i) => {
-    const iconFA = CATEGORY_ICONS[item.category] || 'fa-box';
+    const iconFA = getCategoryIcon(item.category);
     const lineTotal = item.price * item.qty;
     itemRows += `
       <tr>
-        <td style="text-align:center;font-weight:700;color:#FF4500;">${i + 1}</td>
+        <td style="text-align:center;font-weight:700;color:#006838;">${i + 1}</td>
         <td>
           <div style="display:flex;align-items:center;gap:12px;">
-            <div style="width:44px;height:44px;background:linear-gradient(135deg,#FFF5E0,#FFE0B2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <i class="fas ${iconFA}" style="color:#FF4500;font-size:1.2rem;"></i>
+            <div style="width:44px;height:44px;background:linear-gradient(135deg,#F4F9F6,#D4AF37);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="fas ${iconFA}" style="color:#006838;font-size:1.2rem;"></i>
             </div>
-            <span style="font-weight:600;color:#5C2E00;">${item.name}</span>
+            <span style="font-weight:600;color:#002814;">${item.name}</span>
           </div>
         </td>
-        <td style="text-align:center;color:#A0622A;text-decoration:line-through;">₹${item.mrp.toLocaleString('en-IN')}</td>
-        <td style="text-align:center;color:#FF4500;font-weight:700;">₹${item.price.toLocaleString('en-IN')}</td>
-        <td style="text-align:center;font-weight:700;color:#5C2E00;">${item.qty}</td>
-        <td style="text-align:right;font-weight:800;color:#FF4500;">₹${lineTotal.toLocaleString('en-IN')}</td>
+        <td style="text-align:center;color:#557A68;text-decoration:line-through;">₹${item.mrp.toLocaleString('en-IN')}</td>
+        <td style="text-align:center;color:#006838;font-weight:700;">₹${item.price.toLocaleString('en-IN')}</td>
+        <td style="text-align:center;font-weight:700;color:#002814;">${item.qty}</td>
+        <td style="text-align:right;font-weight:800;color:#006838;">₹${lineTotal.toLocaleString('en-IN')}</td>
       </tr>`;
   });
 
@@ -587,30 +656,30 @@ function downloadCrackerList() {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Poppins', sans-serif; background: #FFFBF0; color: #5C2E00; padding: 30px 40px; }
-    .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 3px solid #FF4500; }
+    body { font-family: 'Poppins', sans-serif; background: #FFFBF0; color: #002814; padding: 30px 40px; }
+    .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 3px solid #006838; }
     .brand { display: flex; align-items: center; gap: 14px; }
-    .brand-name { font-size: 1.6rem; font-weight: 800; color: #FF4500; }
-    .brand-sub { font-size: 0.78rem; color: #A0622A; font-weight: 500; }
+    .brand-name { font-size: 1.6rem; font-weight: 800; color: #006838; }
+    .brand-sub { font-size: 0.78rem; color: #557A68; font-weight: 500; }
     .doc-title { text-align: right; }
-    .doc-title h2 { font-size: 1.3rem; font-weight: 800; color: #FF4500; }
-    .doc-title p { font-size: 0.8rem; color: #A0622A; margin-top: 3px; }
-    .customer-box { background: white; border-left: 4px solid #FF9A00; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(255,69,0,0.08); }
-    .customer-box h3 { font-size: 0.85rem; font-weight: 700; color: #FF4500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .doc-title h2 { font-size: 1.3rem; font-weight: 800; color: #006838; }
+    .doc-title p { font-size: 0.8rem; color: #557A68; margin-top: 3px; }
+    .customer-box { background: white; border-left: 4px solid #D4AF37; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,104,56,0.08); }
+    .customer-box h3 { font-size: 0.85rem; font-weight: 700; color: #006838; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
     .cust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
     .cust-grid p { font-size: 0.85rem; }
-    .cust-grid strong { color: #7A2800; }
-    table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(255,69,0,0.08); margin-bottom: 20px; }
-    thead { background: linear-gradient(135deg, #FF4500, #FF9A00); }
+    .cust-grid strong { color: #004d28; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,104,56,0.08); margin-bottom: 20px; }
+    thead { background: linear-gradient(135deg, #006838, #008744); }
     thead th { padding: 13px 14px; text-align: left; color: white; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    tbody tr { border-bottom: 1px solid #FFE0B2; }
+    tbody tr { border-bottom: 1px solid #D4AF37; }
     tbody tr:last-child { border-bottom: none; }
     tbody td { padding: 12px 14px; font-size: 0.88rem; }
-    tbody tr:nth-child(even) { background: #FFFBF0; }
-    .grand-total { background: linear-gradient(135deg, #FF4500, #FF9A00); border-radius: 12px; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; color: white; margin-bottom: 20px; }
+    tbody tr:nth-child(even) { background: #F4F9F6; }
+    .grand-total { background: linear-gradient(135deg, #006838, #008744); border-radius: 12px; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; color: white; margin-bottom: 20px; }
     .grand-total span { font-size: 1rem; font-weight: 600; }
     .grand-total .amt { font-size: 1.6rem; font-weight: 800; }
-    .footer { text-align: center; padding-top: 16px; border-top: 2px solid #FFE0B2; font-size: 0.8rem; color: #A0622A; }
+    .footer { text-align: center; padding-top: 16px; border-top: 2px solid #D4AF37; font-size: 0.8rem; color: #557A68; }
     @media print {
       body { background: white; padding: 20px; }
       .no-print { display: none !important; }
@@ -668,7 +737,7 @@ function downloadCrackerList() {
     <p style="margin-top:4px;">Sivakasi, Virudhunagar District, Tamil Nadu – 626189</p>
     <p style="margin-top:8px;font-size:0.72rem;color:#cc6600;">Please burst crackers responsibly as per government regulations.</p>
     <div class="no-print" style="margin-top:20px;">
-      <button onclick="window.print()" style="background:linear-gradient(135deg,#FF4500,#FF9A00);color:white;border:none;padding:12px 28px;border-radius:30px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;">
+      <button onclick="window.print()" style="background:linear-gradient(135deg,#006838,#008744);color:white;border:none;padding:12px 28px;border-radius:30px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;">
         <i class="fas fa-print"></i> Print / Save as PDF
       </button>
     </div>
@@ -703,7 +772,7 @@ function toggleMobileMenu() {
 // COUNTDOWN TIMER
 // ================================================
 function startCountdown() {
-  const endDate = new Date('2025-10-20T23:59:59');
+  const endDate = new Date('2026-10-20T23:59:59');
   function update() {
     const now = new Date();
     const diff = endDate - now;
@@ -858,4 +927,123 @@ function debounce(fn, delay) {
     clearTimeout(timer);
     timer = setTimeout(() => fn.apply(this, args), delay);
   };
+}
+
+// ================================================
+// PDF EXPORT
+// ================================================
+function downloadEstimate() {
+  if (!window.html2pdf) {
+    showToast('PDF Library not loaded. Please try again.');
+    return;
+  }
+  if (!confirmedOrder) {
+    showToast('No active order to download!');
+    return;
+  }
+
+  const { customer, items, total, date } = confirmedOrder;
+
+  let itemRows = '';
+  items.forEach((item, i) => {
+    const iconFA = getCategoryIcon(item.category);
+    const lineTotal = item.price * item.qty;
+    const imgHtml = item.image_url 
+      ? `<img src="${item.image_url}" style="width:36px; height:36px; object-fit:cover; border-radius:6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">`
+      : `<i class="fas ${iconFA}" style="color:#006838;font-size:1.2rem;"></i>`;
+
+    itemRows += `
+      <tr>
+        <td style="padding: 12px 14px; font-size: 0.88rem; text-align:center;font-weight:700;color:#006838; border-bottom: 1px solid #D4AF37;">${i + 1}</td>
+        <td style="padding: 12px 14px; font-size: 0.88rem; border-bottom: 1px solid #D4AF37;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:44px;height:44px;background:linear-gradient(135deg,#F4F9F6,#D4AF37);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              ${imgHtml}
+            </div>
+            <span style="font-weight:600;color:#002814;">${item.name}</span>
+          </div>
+        </td>
+        <td style="padding: 12px 14px; font-size: 0.88rem; text-align:center;color:#557A68;text-decoration:line-through; border-bottom: 1px solid #D4AF37;">₹${item.mrp.toLocaleString('en-IN')}</td>
+        <td style="padding: 12px 14px; font-size: 0.88rem; text-align:center;color:#006838;font-weight:700; border-bottom: 1px solid #D4AF37;">₹${item.price.toLocaleString('en-IN')}</td>
+        <td style="padding: 12px 14px; font-size: 0.88rem; text-align:center;font-weight:700;color:#002814; border-bottom: 1px solid #D4AF37;">${item.qty}</td>
+        <td style="padding: 12px 14px; font-size: 0.88rem; text-align:right;font-weight:800;color:#006838; border-bottom: 1px solid #D4AF37;">₹${lineTotal.toLocaleString('en-IN')}</td>
+      </tr>`;
+  });
+
+  const html = `
+    <div style="font-family: 'Poppins', sans-serif; background: #FFFBF0; color: #002814; padding: 30px 40px; box-sizing: border-box; width: 100%;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 3px solid #006838;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div>
+            <div style="font-size: 1.6rem; font-weight: 800; color: #006838;">SS Crackers</div>
+            <div style="font-size: 0.78rem; color: #557A68; font-weight: 500;">Sivakasi Factory Price | Tamil Nadu</div>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <h2 style="font-size: 1.3rem; font-weight: 800; color: #006838; margin: 0;">Estimate</h2>
+          <p style="font-size: 0.8rem; color: #557A68; margin-top: 3px;">Date: ${date}</p>
+        </div>
+      </div>
+
+      <div style="background: white; border-left: 4px solid #D4AF37; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,104,56,0.08);">
+        <h3 style="font-size: 0.85rem; font-weight: 700; color: #006838; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px 0;">Customer Details</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px;">
+          <p style="margin: 0; font-size: 0.85rem;"><strong>Name:</strong> ${customer.name}</p>
+          <p style="margin: 0; font-size: 0.85rem;"><strong>Phone:</strong> ${customer.phone}</p>
+          ${customer.email ? `<p style="margin: 0; font-size: 0.85rem;"><strong>Email:</strong> ${customer.email}</p>` : ''}
+          <p style="margin: 0; font-size: 0.85rem;"><strong>City:</strong> ${customer.city} – ${customer.pin}</p>
+          <p style="grid-column: 1/-1; margin: 0; font-size: 0.85rem;"><strong>Address:</strong> ${customer.address}</p>
+        </div>
+      </div>
+
+      <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,104,56,0.08); margin-bottom: 20px;">
+        <thead style="background: linear-gradient(135deg, #006838, #008744);">
+          <tr>
+            <th style="padding: 13px 14px; text-align: center; color: white; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; width:40px;">#</th>
+            <th style="padding: 13px 14px; text-align: left; color: white; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Product Name</th>
+            <th style="padding: 13px 14px; text-align: center; color: white; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; width:100px;">MRP</th>
+            <th style="padding: 13px 14px; text-align: center; color: white; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; width:100px;">Price</th>
+            <th style="padding: 13px 14px; text-align: center; color: white; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; width:60px;">Qty</th>
+            <th style="padding: 13px 14px; text-align: right; color: white; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; width:110px;">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${itemRows}
+        </tbody>
+      </table>
+
+      <div style="background: linear-gradient(135deg, #006838, #008744); border-radius: 12px; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; color: white; margin-bottom: 20px;">
+        <span style="font-size: 1rem; font-weight: 600;">Grand Total (${items.length} product${items.length > 1 ? 's' : ''})</span>
+        <span style="font-size: 1.6rem; font-weight: 800;">₹${total.toLocaleString('en-IN')}</span>
+      </div>
+
+      <div style="text-align: center; padding-top: 16px; border-top: 2px solid #D4AF37; font-size: 0.8rem; color: #557A68;">
+        <p style="margin: 0;">Thank you for choosing SS Crackers! &nbsp;|&nbsp; +91 98765 43210 &nbsp;|&nbsp; sscrackers@gmail.com</p>
+        <p style="margin: 4px 0 0 0;">Sivakasi, Virudhunagar District, Tamil Nadu – 626189</p>
+      </div>
+    </div>
+  `;
+
+  const container = document.createElement('div');
+  container.style.position = 'absolute';
+  container.style.left = '-9999px';
+  container.style.top = '0';
+  container.style.width = '800px';
+  container.innerHTML = html;
+  
+  document.body.appendChild(container);
+  
+  const opt = {
+    margin:       [0.3, 0.3, 0.3, 0.3],
+    filename:     'SS_Crackers_Estimate.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2, useCORS: true, windowWidth: 800 },
+    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  showToast('Generating your PDF... Please wait.', 4000);
+  
+  html2pdf().set(opt).from(container.firstElementChild).save().then(() => {
+    document.body.removeChild(container);
+  });
 }

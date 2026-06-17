@@ -20,8 +20,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Main CSS -->
-  <link rel="stylesheet" href="css/style.css?v=23">
-  <link rel="stylesheet" href="css/animate.css?v=23">
+  <link rel="stylesheet" href="css/style.css?v=36">
+  <link rel="stylesheet" href="css/animate.css?v=36">
 </head>
 <body>
 
@@ -310,7 +310,7 @@
       <!-- Price List Table Section -->
       <div id="pricelist" class="pricelist-section">
         <div class="pricelist-header">
-          <h3><i class="fas fa-list-alt"></i> Complete Price List – SS Crackers 2025</h3>
+          <h3><i class="fas fa-list-alt"></i> Complete Price List – SS Crackers 2026</h3>
           <button class="btn btn-primary" onclick="printPriceList()">
             <i class="fas fa-print"></i> Print Price List
           </button>
@@ -319,12 +319,13 @@
           <table class="pricelist-table" id="priceTable">
             <thead>
               <tr>
-                <th>S.No</th>
-                <th>Product Name</th>
-                <th>MRP (₹)</th>
-                <th>Our Price (₹) <span class="discount-badge">80% OFF</span></th>
-                <th>Qty</th>
-                <th>Action</th>
+                <th style="width: 5%;">S.No</th>
+                <th style="width: 70px; text-align: center;">Image</th>
+                <th style="width: 35%; text-align: center;">Product Name</th>
+                <th style="text-align: center;">MRP (₹)</th>
+                <th style="text-align: center;">Our Price (₹) <span class="discount-badge">80% OFF</span></th>
+                <th style="text-align: center;">Qty</th>
+                <th style="width: 150px; text-align: center;">&nbsp;</th>
               </tr>
             </thead>
             <tbody id="priceTableBody">
@@ -576,7 +577,7 @@
 
     <div class="footer-bottom">
       <div class="container">
-        <p>© 2025 SS Crackers, Sivakasi. All Rights Reserved. | Designed with care for Tamil Nadu Customers</p>
+        <p>© 2026 SS Crackers, Sivakasi. All Rights Reserved. | Designed with care for Tamil Nadu Customers</p>
         <p class="footer-disclaimer">Crackers must be used as per government regulations. Please burst crackers responsibly.</p>
       </div>
     </div>
@@ -584,19 +585,18 @@
 
   <!-- Back to Top -->
   <button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="Back to top">
-    <i class="fas fa-chevron-up"></i>
+    <i class="fas fa-rocket"></i>
   </button>
 
   <!-- ===================== CART SIDEBAR ===================== -->
   <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
   <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-sidebar-header">
-      <div class="cart-sidebar-title">
-        <i class="fas fa-shopping-basket"></i>
-        <span>My Cart</span>
-        <span class="cart-item-count" id="cartItemCount">0 items</span>
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-basket"></i> My Cart <span class="cart-item-count" id="cartItemCount">0 items</span></h3>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <button class="cart-clear-btn" onclick="clearCart()" style="background:none; border:none; color:var(--gold); font-size:1.1rem; cursor:pointer;" title="Clear Cart"><i class="fas fa-trash-alt"></i></button>
+        <button class="cart-close-btn" onclick="closeCart()"><i class="fas fa-times"></i></button>
       </div>
-      <button class="cart-close-btn" onclick="closeCart()"><i class="fas fa-times"></i></button>
     </div>
     <div class="cart-body" id="cartBody">
       <!-- Cart items rendered by JS -->
@@ -622,12 +622,12 @@
           <div class="step-num">1</div>
           <span>Your Details</span>
         </div>
-        <div class="step-line"></div>
+        <div class="step-line" id="step-line-1"></div>
         <div class="step" id="step-ind-2">
           <div class="step-num">2</div>
           <span>Order Summary</span>
         </div>
-        <div class="step-line"></div>
+        <div class="step-line" id="step-line-2"></div>
         <div class="step" id="step-ind-3">
           <div class="step-num">3</div>
           <span>Confirmation</span>
@@ -699,8 +699,8 @@
           <h2 class="thankyou-title">Booking Confirmed!</h2>
           <p class="thankyou-msg" id="thankyouMsg">Thank you! Your order has been placed successfully. Our team will contact you shortly to confirm delivery details.</p>
           <div class="thankyou-actions">
-            <button class="btn btn-download" onclick="downloadCrackerList()">
-              <i class="fas fa-download"></i> Download Your Cracker List
+            <button class="btn btn-download" onclick="downloadEstimate()">
+              <i class="fas fa-download"></i> Download Your Estimate
             </button>
             <button class="btn btn-outline-warm" onclick="closeCheckout(); clearCart();">
               Continue Shopping
@@ -713,10 +713,24 @@
   </div>
 
   <!-- Success Toast -->
+  <!-- Bottom Cart Summary (Sticky) -->
+  <div class="bottom-cart-summary" id="bottomCartSummary" onclick="openCart()">
+    <div class="bcs-info">
+      <span id="bcsCount">0 Items</span>
+      <span class="bcs-sep">|</span>
+      <span id="bcsTotal">₹0</span>
+    </div>
+    <div class="bcs-action">
+      <button onclick="clearCart(); event.stopPropagation();" style="background:none; border:none; color:var(--gold-light); font-size:1.2rem; cursor:pointer; padding:0 10px;" title="Clear Cart"><i class="fas fa-trash-alt"></i></button>
+      View Cart <i class="fas fa-shopping-bag"></i>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <!-- Main JS -->
-  <script src="js/main.js?v=23"></script>
-  <script src="js/animate.js?v=23"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="js/main.js?v=36"></script>
+  <script src="js/animate.js?v=36"></script>
 </body>
 </html>
