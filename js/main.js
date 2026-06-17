@@ -1047,3 +1047,16 @@ function downloadEstimate() {
     document.body.removeChild(container);
   });
 }
+
+// ================================================
+// MOBILE MENU
+// ================================================
+function toggleMobileMenu() {
+  const nav = document.getElementById('mainNav');
+  const overlay = document.getElementById('mobileOverlay');
+  const hamburger = document.getElementById('hamburger');
+  
+  if (nav) nav.classList.toggle('active');
+  if (overlay) overlay.classList.toggle('active');
+  if (hamburger) hamburger.classList.toggle('active');
+}
