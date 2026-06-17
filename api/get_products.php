@@ -8,10 +8,13 @@ header('Expires: 0');
 require_once 'config.php';
 
 // Fetch all products from the database
-$sql = "SELECT * FROM products ORDER BY id ASC";
-$result = $conn->query($sql);
-
 $products = [];
+try {
+    $sql = "SELECT * FROM products ORDER BY id ASC";
+    $result = $conn->query($sql);
+} catch (mysqli_sql_exception $e) {
+    $result = false;
+}
 
 if ($result && $result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {

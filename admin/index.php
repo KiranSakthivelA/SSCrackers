@@ -2,8 +2,13 @@
 require_once 'auth.php';
 
 // Fetch Products (Inventory)
-$sql = "SELECT * FROM products ORDER BY id DESC";
-$result = $conn->query($sql);
+$result = false;
+try {
+    $sql = "SELECT * FROM products ORDER BY id DESC";
+    $result = $conn->query($sql);
+} catch (mysqli_sql_exception $e) {
+    // Ignore missing table error
+}
 
 // Fetch Orders
 $all_orders = [];
