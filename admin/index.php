@@ -325,7 +325,7 @@ try {
                                 <td><?= $row['id'] ?></td>
                                 <td>
                                     <?php if($row['image_url']): ?>
-                                        <img src="../<?= htmlspecialchars($row['image_url']) ?>" class="img-thumb">
+                                        <img src="<?= strpos($_SERVER['HTTP_HOST'], 'localhost') !== false ? '../' : 'https://sscrackers.in/' ?><?= htmlspecialchars($row['image_url']) ?>" class="img-thumb">
                                     <?php else: ?>
                                         <div class="no-img"><i class="fas fa-image"></i></div>
                                     <?php endif; ?>

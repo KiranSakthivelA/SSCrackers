@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label>Product Image (Leave blank to keep current)</label>
                 <input type="file" name="image" accept="image/*">
                 <?php if($product['image_url']): ?>
-                    <img src="../<?= htmlspecialchars($product['image_url']) ?>" class="current-img">
+                    <img src="<?= strpos($_SERVER['HTTP_HOST'], 'localhost') !== false ? '../' : 'https://sscrackers.in/' ?><?= htmlspecialchars($product['image_url']) ?>" class="current-img">
                     <label class="remove-img">
                         <input type="checkbox" name="remove_image" value="1"> 
                         <i class="fas fa-trash-alt"></i> Delete current image
