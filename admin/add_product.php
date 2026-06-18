@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product - SS Crackers</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #D32F2F;
@@ -65,8 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             --text-dark: #2b1111;
             --text-medium: #5c3333;
             --text-light: #8a6b6b;
-            --font-main: 'Nunito', sans-serif;
-            --font-display: 'Playfair Display', serif;
+            --font-main: 'Poppins', sans-serif;
+            --font-display: 'Outfit', sans-serif;
             --radius-md: 14px;
             --radius-xl: 32px;
             --shadow-md: 0 4px 20px rgba(255,69,0,0.16);
