@@ -79,22 +79,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Product - SS Crackers</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #FF4500;
-            --primary-dark: #CC3700;
+            --primary: #D32F2F;
+            --primary-dark: #7F0000;
             --secondary: #D4AF37;
-            --accent: #FFD600;
+            --accent: #D32F2F;
             --white: #ffffff;
-            --off-white: #FFFBF0;
-            --light-gray: #FFF5E0;
-            --medium-gray: #FFE0B2;
-            --text-dark: #7A2800;
-            --text-medium: #5C2E00;
-            --text-light: #A0622A;
-            --font-main: 'Poppins', sans-serif;
-            --font-display: 'Baloo 2', cursive;
+            --off-white: #f9fafb;
+            --light-gray: #f3f4f6;
+            --medium-gray: #e5e7eb;
+            --text-dark: #2b1111;
+            --text-medium: #5c3333;
+            --text-light: #8a6b6b;
+            --font-main: 'Nunito', sans-serif;
+            --font-display: 'Playfair Display', serif;
             --radius-md: 14px;
             --radius-xl: 32px;
             --shadow-md: 0 4px 20px rgba(255,69,0,0.16);
