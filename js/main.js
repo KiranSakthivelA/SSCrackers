@@ -35,7 +35,45 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSearchInput();
   initRevealAnimations();
   updateCartUI();
+  initHeroSlider();
 });
+
+// ================================================
+// HERO SLIDER
+// ================================================
+let currentHeroSlide = 0;
+let heroSlideInterval;
+
+function initHeroSlider() {
+  const slides = document.querySelectorAll('.hero-slide');
+  if (slides.length <= 1) return;
+  startHeroSlideInterval();
+}
+
+function showHeroSlide(index) {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  if (slides.length === 0) return;
+  
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  
+  currentHeroSlide = (index + slides.length) % slides.length;
+  slides[currentHeroSlide].classList.add('active');
+  if (dots[currentHeroSlide]) dots[currentHeroSlide].classList.add('active');
+}
+
+function nextHeroSlide() { showHeroSlide(currentHeroSlide + 1); resetHeroSlideInterval(); }
+function prevHeroSlide() { showHeroSlide(currentHeroSlide - 1); resetHeroSlideInterval(); }
+function goToHeroSlide(index) { showHeroSlide(index); resetHeroSlideInterval(); }
+
+function startHeroSlideInterval() {
+  heroSlideInterval = setInterval(() => { showHeroSlide(currentHeroSlide + 1); }, 5000);
+}
+function resetHeroSlideInterval() {
+  clearInterval(heroSlideInterval);
+  startHeroSlideInterval();
+}
 
 // ================================================
 // PARTICLES
@@ -822,19 +860,26 @@ function animateCounter(el) {
 // ================================================
 // SCROLL EVENTS
 // ================================================
+let isScrolling = false;
 function setupScrollEvents() {
   const backTop = document.getElementById('backToTop');
   const header = document.getElementById('mainHeader');
   window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    if (backTop) backTop.classList.toggle('visible', scrollY > 400);
-    if (header) {
-      header.style.boxShadow = scrollY > 10
-        ? '0 4px 20px rgba(255,69,0,0.18)'
-        : '0 2px 8px rgba(255,69,0,0.10)';
+    if (!isScrolling) {
+      window.requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        if (backTop) backTop.classList.toggle('visible', scrollY > 400);
+        if (header) {
+          header.style.boxShadow = scrollY > 10
+            ? '0 4px 20px rgba(255,69,0,0.18)'
+            : '0 2px 8px rgba(255,69,0,0.10)';
+        }
+        updateActiveNav();
+        isScrolling = false;
+      });
+      isScrolling = true;
     }
-    updateActiveNav();
-  });
+  }, { passive: true });
 }
 
 function scrollToTop() {

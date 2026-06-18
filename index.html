@@ -14,7 +14,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -103,13 +103,13 @@
 
   <!-- ===================== HERO SECTION ===================== -->
   <section class="hero-section" id="home">
-    <div class="hero-slider">
+    <div class="hero-slider" id="heroSlider">
       <!-- Slide 1 -->
       <div class="hero-slide active">
-        <div class="hero-bg" style="background-image: url('images/hero_banner.png')"></div>
+        <div class="hero-bg" style="background-color: var(--bg-soft);"></div>
         <div class="hero-overlay"></div>
         <div class="container">
-          <div class="hero-content">
+          <div class="hero-content" style="text-align: center;">
             <div class="hero-badge animate-fadeInUp">Sivakasi Factory Price</div>
             <h1 class="hero-title animate-fadeInUp delay-1">
               Celebrate Every Festival with<br>
@@ -117,9 +117,9 @@
             </h1>
             <p class="hero-subtitle animate-fadeInUp delay-2">
               Tamil Nadu's Most Trusted Online Crackers Store<br>
-              <strong>Upto 80% OFF</strong> &nbsp;|&nbsp; 150+ Products &nbsp;|&nbsp; Safe & Quality Guaranteed
+              <strong>Upto 80% OFF</strong> &nbsp;|&nbsp; 150+ Products
             </p>
-            <div class="hero-btns animate-fadeInUp delay-3">
+            <div class="hero-btns animate-fadeInUp delay-3" style="justify-content: center;">
               <a href="#products" class="btn btn-primary btn-lg">
                 <i class="fas fa-shopping-basket"></i> Shop Now
               </a>
@@ -127,14 +127,72 @@
                 <i class="fas fa-list"></i> View Price List
               </a>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="hero-slide">
+        <div class="hero-bg" style="background-color: var(--bg-soft);"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-badge animate-fadeInUp">Safe & Certified</div>
+            <h1 class="hero-title animate-fadeInUp delay-1">
+              Premium Sparklers &<br>
+              <span class="hero-highlight">Flower Pots</span>
+            </h1>
+            <p class="hero-subtitle animate-fadeInUp delay-2">
+              Add sparkle to your celebrations with our premium collections.<br>
+              <strong>100% Quality Assured</strong> &nbsp;|&nbsp; Special Kids Collection
+            </p>
+            <div class="hero-btns animate-fadeInUp delay-3">
+              <a href="#products" class="btn btn-primary btn-lg" onclick="filterCategory('sparkler')">
+                <i class="fas fa-star"></i> Shop Sparklers
+              </a>
+            </div>
             <div class="hero-features animate-fadeInUp delay-4">
-              <div class="hero-feat"><i class="fas fa-truck"></i> Free Delivery</div>
-              <div class="hero-feat"><i class="fas fa-shield-alt"></i> Quality Assured</div>
-              <div class="hero-feat"><i class="fas fa-tag"></i> Best Price</div>
-              <div class="hero-feat"><i class="fas fa-headset"></i> 24/7 Support</div>
+              <div class="hero-feat"><i class="fas fa-check-circle"></i> Child Safe</div>
+              <div class="hero-feat"><i class="fas fa-fire"></i> Less Smoke</div>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="hero-slide">
+        <div class="hero-bg" style="background-color: var(--bg-soft);"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-badge animate-fadeInUp">Mega Sale</div>
+            <h1 class="hero-title animate-fadeInUp delay-1">
+              Upto 80% Discount<br>
+              <span class="hero-highlight">On All Fireworks!</span>
+            </h1>
+            <p class="hero-subtitle animate-fadeInUp delay-2">
+              Direct from Sivakasi factory. No middlemen. Maximum savings.<br>
+              <strong>Free Delivery Above ₹3000</strong> &nbsp;|&nbsp; Fast Shipping
+            </p>
+            <div class="hero-btns animate-fadeInUp delay-3">
+              <a href="#offers" class="btn btn-primary btn-lg">
+                <i class="fas fa-tags"></i> View Offers
+              </a>
+            </div>
+            <div class="hero-features animate-fadeInUp delay-4">
+              <div class="hero-feat"><i class="fas fa-box"></i> Wholesale Rates</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls & Indicators -->
+      <button class="hero-nav-btn prev-btn" onclick="prevHeroSlide()"><i class="fas fa-chevron-left"></i></button>
+      <button class="hero-nav-btn next-btn" onclick="nextHeroSlide()"><i class="fas fa-chevron-right"></i></button>
+      <div class="hero-indicators">
+        <span class="hero-dot active" onclick="goToHeroSlide(0)"></span>
+        <span class="hero-dot" onclick="goToHeroSlide(1)"></span>
+        <span class="hero-dot" onclick="goToHeroSlide(2)"></span>
       </div>
     </div>
 

@@ -247,7 +247,7 @@ try {
                         <td><strong><?= htmlspecialchars($order['order_number']) ?></strong></td>
                         <td><?= htmlspecialchars($order['customer_name']) ?></td>
                         <td class="price">₹<?= number_format($order['total_amount'], 2) ?></td>
-                        <td>Cash on Delivery</td>
+                        <td></td>
                         <td><span class="status-badge status-<?= $order['status'] === 'Completed' ? 'Completed' : 'Pending' ?>"><?= $order['status'] === 'Completed' ? 'Paid' : 'Unpaid' ?></span></td>
                     </tr>
                     <?php endforeach; ?>

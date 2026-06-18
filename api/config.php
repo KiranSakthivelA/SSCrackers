@@ -3,9 +3,9 @@
 // Update these details with your MilesWeb database credentials
 
 $db_host = 'localhost';
-$db_user = 'codevibe1_admin'; 
-$db_pass = 'YOUR_PASSWORD_HERE'; // Please enter your DB password before uploading!
-$db_name = 'codevibe1_sscrackerstest'; 
+$db_user = 'root'; 
+$db_pass = ''; 
+$db_name = 'ss_crackers'; 
 
 // Connect to MySQL (wrapped in try-catch for PHP 8.1+ exception handling)
 try {
