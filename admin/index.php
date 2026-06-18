@@ -80,31 +80,31 @@ try {
 
         .main-content { margin-left: 250px; flex: 1; padding: 20px; max-width: calc(100vw - 250px); }
         
-        .container { background: var(--white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border: 1px solid var(--medium-gray); margin-bottom: 30px; }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--medium-gray); padding-bottom: 20px; margin-bottom: 30px; }
-        .header h2 { margin: 0; font-size: 28px; color: var(--text-dark); font-weight: 800; font-family: var(--font-display); display: flex; align-items: center; gap: 10px; }
-        .header h2 i { color: var(--primary); }
+        .container { background: var(--white); padding: 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border: 1px solid var(--medium-gray); margin-bottom: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--medium-gray); padding-bottom: 15px; margin-bottom: 20px; }
+        .header h2 { margin: 0; font-size: 22px; color: var(--text-dark); font-weight: 700; font-family: var(--font-main); display: flex; align-items: center; gap: 8px; }
+        .header h2 i { color: var(--primary); font-size: 20px; }
         
-        .btn { padding: 10px 24px; font-family: var(--font-main); background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-decoration: none; border-radius: var(--radius-xl); font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(230,57,70,0.35); transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; border: 2px solid transparent; cursor: pointer; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(230,57,70,0.45); }
+        .btn { padding: 8px 18px; font-family: var(--font-main); background: rgba(211, 47, 47, 0.1); backdrop-filter: blur(8px); color: var(--primary); text-decoration: none; border-radius: var(--radius-xl); font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(211, 47, 47, 0.3); cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .btn:hover { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(211, 47, 47, 0.25); }
         .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); box-shadow: none; }
         .btn-outline:hover { background: var(--primary); color: white; transform: translateY(-2px); }
         .btn-sm { padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; }
         
         .table-container { overflow-x: auto; border-radius: var(--radius-md); border: 1px solid var(--medium-gray); background: var(--white); }
         table { width: 100%; border-collapse: collapse; white-space: nowrap; }
-        th, td { text-align: left; padding: 16px 20px; border-bottom: 1px solid var(--medium-gray); }
-        th { background: var(--light-gray); font-weight: 700; color: var(--text-dark); font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+        th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--medium-gray); font-size: 14px; }
+        th { background: var(--light-gray); font-weight: 700; color: var(--text-dark); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
         tr:last-child td { border-bottom: none; }
         tr:hover { background: var(--off-white); }
         
-        .img-thumb { width: 48px; height: 48px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-sm); border: 2px solid var(--light-gray); }
-        .no-img { width: 48px; height: 48px; background: var(--light-gray); color: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .img-thumb { width: 36px; height: 36px; object-fit: cover; border-radius: 6px; box-shadow: var(--shadow-sm); border: 1px solid var(--light-gray); }
+        .no-img { width: 36px; height: 36px; background: var(--light-gray); color: var(--text-light); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
         
-        .product-name { font-weight: 700; color: var(--text-dark); }
-        .category-badge { display: inline-block; padding: 6px 16px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; box-shadow: var(--shadow-sm); }
-        .price { font-weight: 700; color: #10b981; font-size: 1.1rem; }
-        .mrp { color: var(--text-light); text-decoration: line-through; font-size: 14px; font-weight: 500; }
+        .product-name { font-weight: 600; color: var(--text-dark); }
+        .category-badge { display: inline-block; padding: 4px 10px; background: rgba(212, 175, 55, 0.15); color: #8a6500; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; backdrop-filter: blur(4px); }
+        .price { font-weight: 700; color: var(--primary); font-size: 1rem; }
+        .mrp { color: var(--text-light); text-decoration: line-through; font-size: 13px; font-weight: 500; }
         
         .actions a, .actions button { margin-right: 10px; color: var(--text-medium); text-decoration: none; transition: color 0.2s; font-size: 16px; background:none; border:none; cursor:pointer; }
         .actions a.edit:hover { color: #3b82f6; }
