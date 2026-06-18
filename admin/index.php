@@ -44,23 +44,23 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - SS Crackers Admin</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #006838;
-            --primary-dark: #004d28;
+            --primary: #FF4500;
+            --primary-dark: #CC3700;
             --secondary: #D4AF37;
-            --accent: #008744;
+            --accent: #FFD600;
             --white: #ffffff;
-            --off-white: #FFFFF0;
-            --light-gray: #F4F9F6;
-            --medium-gray: #e0e8e4;
-            --text-dark: #002814;
-            --text-medium: #2C4A3B;
-            --text-light: #557A68;
-            --font-main: 'Nunito', sans-serif;
-            --font-display: 'Playfair Display', serif;
+            --off-white: #FFFBF0;
+            --light-gray: #FFF5E0;
+            --medium-gray: #FFE0B2;
+            --text-dark: #7A2800;
+            --text-medium: #5C2E00;
+            --text-light: #A0622A;
+            --font-main: 'Poppins', sans-serif;
+            --font-display: 'Baloo 2', cursive;
             --radius-md: 14px;
             --radius-xl: 32px;
             --shadow-sm: 0 2px 8px rgba(0,104,56,0.10);
@@ -305,8 +305,29 @@ try {
                 <h2><i class="fas fa-boxes"></i> Inventory Management</h2>
                 <a href="add_product.php" class="btn"><i class="fas fa-plus"></i> Add Product</a>
             </div>
+            
+            <div class="inventory-toolbar" style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center; background: var(--light-gray); padding: 15px 20px; border-radius: var(--radius-md); border: 1px solid var(--medium-gray);">
+                <div style="flex: 1; position: relative;">
+                    <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-light);"></i>
+                    <input type="text" id="searchInput" placeholder="Search products by name..." style="width: 100%; padding: 12px 15px 12px 40px; border: 2px solid var(--medium-gray); border-radius: 8px; font-family: var(--font-main); font-size: 14px; color: var(--text-dark);">
+                </div>
+                <div style="width: 250px;">
+                    <select id="categoryFilter" style="width: 100%; padding: 12px 15px; border: 2px solid var(--medium-gray); border-radius: 8px; font-family: var(--font-main); font-size: 14px; color: var(--text-dark); cursor: pointer;">
+                        <option value="all">All Categories</option>
+                        <option value="bijili">Bijili & Strings</option>
+                        <option value="bombs">Bombs</option>
+                        <option value="flower">Flower Pots</option>
+                        <option value="chakkra">Ground Chakkra</option>
+                        <option value="rocket">Rockets</option>
+                        <option value="aerial">Aerial / Sky Shots</option>
+                        <option value="fancy">Fancy / Kids Items</option>
+                        <option value="sparkler">Sparklers</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="table-container">
-            <table>
+            <table id="inventoryTable">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -318,11 +339,11 @@ try {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="inventoryBody">
                     <?php if ($result->num_rows > 0): ?>
-                        <?php while($row = $result->fetch_assoc()): ?>
-                            <tr>
-                                <td><?= $row['id'] ?></td>
+                        <?php $sno = 1; while($row = $result->fetch_assoc()): ?>
+                            <tr class="inventory-row" data-category="<?= htmlspecialchars($row['category']) ?>">
+                                <td><?= $sno++ ?></td>
                                 <td>
                                     <?php if($row['image_url']): ?>
                                         <img src="<?= strpos($_SERVER['HTTP_HOST'], 'localhost') !== false ? '../' : 'https://sscrackers.in/' ?><?= htmlspecialchars($row['image_url']) ?>" class="img-thumb">
@@ -459,6 +480,35 @@ try {
         function closeModal() {
             document.getElementById('orderModal').classList.remove('active');
         }
+
+        // --- Inventory Search & Filter Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const inventoryRows = document.querySelectorAll('.inventory-row');
+
+            function filterInventory() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedCat = categoryFilter.value;
+
+                inventoryRows.forEach(row => {
+                    const name = row.querySelector('.product-name').textContent.toLowerCase();
+                    const category = row.getAttribute('data-category');
+                    
+                    const matchesSearch = name.includes(searchTerm);
+                    const matchesCat = selectedCat === 'all' || category === selectedCat;
+
+                    if (matchesSearch && matchesCat) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            if(searchInput) searchInput.addEventListener('input', filterInventory);
+            if(categoryFilter) categoryFilter.addEventListener('change', filterInventory);
+        });
     </script>
 </body>
 </html>

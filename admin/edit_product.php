@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         :root {
             --primary: #FF4500;
             --primary-dark: #CC3700;
-            --secondary: #FF9A00;
+            --secondary: #D4AF37;
             --accent: #FFD600;
             --white: #ffffff;
             --off-white: #FFFBF0;
@@ -113,11 +113,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background: var(--light-gray);
         }
         input:focus, select:focus { outline: none; border-color: var(--primary); background: var(--white); }
-        input[type="file"] {
+        .file-upload-wrapper {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            border: 2px dashed var(--primary);
+            border-radius: 12px;
+            background: var(--light-gray);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .file-upload-wrapper:hover {
+            background: #ffebe6;
+            border-color: var(--primary-dark);
+        }
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .file-upload-content {
+            text-align: center;
+            color: var(--primary);
+            z-index: 1;
+        }
+        .file-upload-content i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .file-upload-content span {
             font-family: var(--font-main);
-            width: 100%; padding: 10px; border: 2px dashed var(--primary);
-            border-radius: 8px; background: var(--light-gray); cursor: pointer;
-            color: var(--text-medium);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        #imagePreview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: var(--white);
+            display: none;
+            z-index: 1;
+            padding: 10px;
+            border-radius: 10px;
         }
         .btn-group { display: flex; gap: 15px; margin-top: 30px; }
         .btn { padding: 12px 24px; font-family: var(--font-main); background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: 2px solid transparent; border-radius: var(--radius-xl); cursor: pointer; font-weight: 600; font-size: 15px; box-shadow: 0 4px 15px rgba(255,69,0,0.3); transition: all 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 1; }
@@ -161,12 +209,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="form-group">
                 <label>Product Image (Leave blank to keep current)</label>
-                <input type="file" name="image" accept="image/*">
+                <div class="file-upload-wrapper" style="height: <?= $product['image_url'] ? '200px' : '150px' ?>;">
+                    <input type="file" name="image" id="imageInput" accept="image/*">
+                    <div class="file-upload-content" id="uploadContent" style="<?= $product['image_url'] ? 'display: none;' : '' ?>">
+                        <i class="fas fa-cloud-upload-alt"></i><br>
+                        <span>Drag & Drop to Replace Image</span>
+                    </div>
+                    <?php if($product['image_url']): ?>
+                        <img id="imagePreview" src="<?= strpos($_SERVER['HTTP_HOST'], 'localhost') !== false ? '../' : 'https://sscrackers.in/' ?><?= htmlspecialchars($product['image_url']) ?>" alt="Preview" style="display: block;">
+                    <?php else: ?>
+                        <img id="imagePreview" src="#" alt="Preview">
+                    <?php endif; ?>
+                </div>
                 <?php if($product['image_url']): ?>
-                    <img src="<?= strpos($_SERVER['HTTP_HOST'], 'localhost') !== false ? '../' : 'https://sscrackers.in/' ?><?= htmlspecialchars($product['image_url']) ?>" class="current-img">
                     <label class="remove-img">
                         <input type="checkbox" name="remove_image" value="1"> 
-                        <i class="fas fa-trash-alt"></i> Delete current image
+                        <i class="fas fa-trash-alt"></i> Delete current image entirely
                     </label>
                 <?php endif; ?>
             </div>
@@ -176,5 +234,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </form>
     </div>
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const uploadContent = document.getElementById('uploadContent');
+
+        imageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    uploadContent.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                // If they cancel file selection, revert to previous state
+                <?php if($product['image_url']): ?>
+                    imagePreview.src = "<?= strpos($_SERVER['HTTP_HOST'], 'localhost') !== false ? '../' : 'https://sscrackers.in/' ?><?= htmlspecialchars($product['image_url']) ?>";
+                    imagePreview.style.display = 'block';
+                    uploadContent.style.display = 'none';
+                <?php else: ?>
+                    imagePreview.style.display = 'none';
+                    uploadContent.style.display = 'block';
+                <?php endif; ?>
+            }
+        });
+    </script>
 </body>
 </html>
