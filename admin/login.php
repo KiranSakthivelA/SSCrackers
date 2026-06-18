@@ -26,15 +26,15 @@ if (isset($_POST['login'])) {
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --emerald: #006838;
-            --emerald-dark: #004d28;
+            --primary: #D32F2F;
+            --primary-dark: #7F0000;
             --gold: #D4AF37;
-            --bg-soft: #F4F9F6;
+            --bg-soft: #f9fafb;
             --white: #ffffff;
-            --text-dark: #002814;
-            --text-light: #557A68;
-            --font-main: 'Nunito', sans-serif;
-            --font-display: 'Playfair Display', serif;
+            --text-dark: #2b1111;
+            --text-light: #8a6b6b;
+            --font-main: 'Poppins', sans-serif;
+            --font-display: 'Outfit', sans-serif;
         }
         body { 
             font-family: var(--font-main); 
@@ -51,7 +51,7 @@ if (isset($_POST['login'])) {
         .bg-shape {
             position: absolute;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(0,104,56,0.05), rgba(212,175,55,0.05));
+            background: linear-gradient(135deg, rgba(211,47,47,0.05), rgba(212,175,55,0.05));
             z-index: 0;
         }
         .shape-1 { width: 400px; height: 400px; top: -100px; left: -100px; }
@@ -69,7 +69,7 @@ if (isset($_POST['login'])) {
             backdrop-filter: blur(12px);
             padding: 40px; 
             border-radius: 24px; 
-            box-shadow: 0 8px 32px rgba(0, 104, 56, 0.08), 0 1px 0 rgba(212,175,55,0.15); 
+            box-shadow: 0 8px 32px rgba(211, 47, 47, 0.08), 0 1px 0 rgba(212,175,55,0.15); 
             text-align: center;
             border: 1px solid rgba(255,255,255,0.4);
         }
@@ -79,12 +79,12 @@ if (isset($_POST['login'])) {
             justify-content: center;
             width: 64px;
             height: 64px;
-            background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
             border-radius: 16px;
             font-size: 28px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 24px rgba(0,104,56,0.2);
+            box-shadow: 0 8px 24px rgba(211,47,47,0.2);
         }
         .login-box h2 {
             font-family: var(--font-display);
@@ -92,7 +92,21 @@ if (isset($_POST['login'])) {
             font-weight: 800;
             font-size: 28px;
             margin-bottom: 5px;
-            color: var(--emerald);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .cms-badge {
+            background: rgba(211, 47, 47, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(211, 47, 47, 0.3);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: var(--font-main);
+            font-weight: 700;
         }
         .subtitle {
             color: var(--text-light);
@@ -127,9 +141,9 @@ if (isset($_POST['login'])) {
         }
         input:focus {
             outline: none;
-            border-color: var(--emerald);
+            border-color: var(--primary);
             background: #fff;
-            box-shadow: 0 4px 12px rgba(0,104,56,0.06);
+            box-shadow: 0 4px 12px rgba(211,47,47,0.06);
         }
         input::placeholder {
             color: #9ca3af;
@@ -144,28 +158,28 @@ if (isset($_POST['login'])) {
             cursor: pointer;
             transition: color 0.3s;
         }
-        .toggle-password:hover { color: var(--emerald); }
+        .toggle-password:hover { color: var(--primary); }
         button { 
             font-family: var(--font-main);
             width: 100%; 
             padding: 14px; 
-            background: var(--emerald);
-            color: var(--gold); 
+            background: var(--primary);
+            color: var(--white); 
             border: none; 
             border-radius: 12px; 
             cursor: pointer; 
             font-size: 16px; 
-            font-weight: 800;
+            font-weight: 700;
             transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
             margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(0,104,56,0.2);
+            box-shadow: 0 4px 12px rgba(211,47,47,0.2);
             position: relative;
             overflow: hidden;
         }
         button:hover { 
             transform: translateY(-2px);
-            background: var(--emerald-dark);
-            box-shadow: 0 8px 24px rgba(0,104,56,0.3);
+            background: var(--primary-dark);
+            box-shadow: 0 8px 24px rgba(211,47,47,0.3);
         }
         button::after {
             content: '';
@@ -203,7 +217,7 @@ if (isset($_POST['login'])) {
             <div class="logo-icon">
                 <i class="fas fa-fire"></i>
             </div>
-            <h2>SS Admin CMS</h2>
+            <h2><span class="cms-badge">CMS</span> SS Crackers</h2>
             <div class="subtitle">Enter your credentials to access the CMS portal</div>
             
             <?php if(isset($error)) echo "<div class='error'><i class='fas fa-exclamation-circle'></i> $error</div>"; ?>

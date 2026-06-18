@@ -70,7 +70,7 @@ try {
         
         /* Sidebar layout */
         .sidebar { width: 250px; background: var(--white); border-right: 1px solid var(--medium-gray); height: 100vh; position: fixed; top: 0; left: 0; padding: 20px 0; display: flex; flex-direction: column; z-index: 100; box-shadow: var(--shadow-sm); }
-        .sidebar-brand { padding: 0 20px 20px 20px; font-family: var(--font-display); font-size: 24px; font-weight: 800; color: var(--primary); border-bottom: 1px solid var(--medium-gray); margin-bottom: 20px; }
+        .sidebar-brand { padding: 0 20px 20px 20px; font-family: var(--font-display); font-size: 21px; font-weight: 800; color: var(--primary); border-bottom: 1px solid var(--medium-gray); margin-bottom: 20px; }
         .nav-item { padding: 15px 25px; display: flex; align-items: center; gap: 15px; color: var(--text-medium); text-decoration: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
         .nav-item:hover { background: var(--light-gray); color: var(--primary); }
         .nav-item.active { background: var(--light-gray); color: var(--primary); border-right: 4px solid var(--primary); }
@@ -144,7 +144,7 @@ try {
 <body>
 
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-brand"><i class="fas fa-fire"></i> SS Admin</div>
+        <div class="sidebar-brand"><i class="fas fa-fire"></i> SS Crackers CMS</div>
         
         <?php $pending_count = count(array_filter($all_orders, fn($o) => $o['status'] === 'Pending')); ?>
         
