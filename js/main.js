@@ -216,7 +216,7 @@ function renderPriceTable(data) {
       <td style="text-align:center;">${imgHtml}</td>
       <td style="text-align: center; font-weight:700; color:var(--text-dark);">${p.name}</td>
       <td style="text-align: center; text-decoration:line-through; color:var(--text-light);">₹${p.mrp.toLocaleString('en-IN')}</td>
-      <td style="text-align: center; font-weight:800; color:#004225; font-size:1.05rem;">₹${p.price.toLocaleString('en-IN')}</td>
+      <td style="text-align: center; font-weight:800; color:#D4AF37; font-size:1.05rem;">₹${p.price.toLocaleString('en-IN')}</td>
       <td style="text-align: center;">
         <div class="qty-control-sm" style="margin: 0 auto;">
           <button type="button" onclick="const q=document.getElementById('table-qty-${p.id}'); if(q.value>1) q.value--">-</button>

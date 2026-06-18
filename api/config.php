@@ -3,9 +3,9 @@
 // Update these details with your MilesWeb database credentials
 
 $db_host = 'localhost';
-$db_user = 'root'; 
-$db_pass = ''; 
-$db_name = 'ss_crackers'; 
+$db_user = 'dealsfor2_sscrackers'; 
+$db_pass = 'DBSScrackers@2026'; 
+$db_name = 'dealsfor2_SSCrackers_DB'; 
 
 // Connect to MySQL (wrapped in try-catch for PHP 8.1+ exception handling)
 try {
