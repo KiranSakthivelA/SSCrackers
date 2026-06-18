@@ -99,10 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             --radius-xl: 32px;
             --shadow-md: 0 4px 20px rgba(255,69,0,0.16);
         }
-        body { font-family: var(--font-main); background: var(--off-white); margin: 0; padding: 40px 20px; color: var(--text-dark); }
-        .container { max-width: 600px; margin: auto; background: var(--white); padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border: 1px solid var(--medium-gray); }
-        h2 { font-family: var(--font-display); margin-top: 0; font-size: 28px; color: var(--text-dark); font-weight: 800; margin-bottom: 30px; display: flex; align-items: center; gap: 10px; }
-        h2 i { color: var(--primary); }
+        body { font-family: var(--font-main); background: var(--off-white); margin: 0; padding: 20px; color: var(--text-dark); }
+        .container { max-width: 600px; margin: auto; background: var(--white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border: 1px solid var(--medium-gray); margin-top: 20px; }
+        h2 { font-family: var(--font-main); margin-top: 0; font-size: 22px; color: var(--text-dark); font-weight: 700; margin-bottom: 25px; display: flex; align-items: center; gap: 8px; }
+        h2 i { color: var(--primary); font-size: 20px; }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-medium); font-size: 14px; }
         input[type="text"], input[type="number"], select { 
@@ -167,11 +167,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             padding: 10px;
             border-radius: 10px;
         }
-        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
-        .btn { padding: 12px 24px; font-family: var(--font-main); background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: 2px solid transparent; border-radius: var(--radius-xl); cursor: pointer; font-weight: 600; font-size: 15px; box-shadow: 0 4px 15px rgba(255,69,0,0.3); transition: all 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 1; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,69,0,0.4); }
-        .btn-cancel { background: transparent; color: var(--primary); border: 2px solid var(--primary); box-shadow: none; text-decoration: none; }
-        .btn-cancel:hover { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(255,69,0,0.3); }
+        .btn-group { display: flex; gap: 15px; margin-top: 25px; }
+        .btn { padding: 10px 20px; font-family: var(--font-main); background: rgba(211, 47, 47, 0.1); backdrop-filter: blur(8px); color: var(--primary); border: 1px solid rgba(211, 47, 47, 0.3); border-radius: var(--radius-xl); cursor: pointer; font-weight: 600; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: all 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 1; text-decoration: none; }
+        .btn:hover { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(211, 47, 47, 0.25); }
+        .btn-cancel { background: transparent; color: var(--text-light); border: 1px solid var(--medium-gray); box-shadow: none; text-decoration: none; }
+        .btn-cancel:hover { background: var(--light-gray); color: var(--text-dark); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .error { background: #ffebe6; color: #d32f2f; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; border: 1px solid #ffcdd2; font-weight: 500; }
         .current-img { max-width: 150px; margin-top: 15px; border-radius: 8px; box-shadow: var(--shadow-sm); border: 2px solid var(--light-gray); display: block; }
         .remove-img { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; color: #ef4444; font-size: 14px; font-weight: 600; cursor: pointer; }
