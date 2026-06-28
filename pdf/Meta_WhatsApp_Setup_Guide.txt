@@ -1,0 +1,296 @@
+
+================================================================================
+        SS CRACKERS — META WHATSAPP BUSINESS CLOUD API SETUP GUIDE
+================================================================================
+  Project   : SS Crackers (sscrackers.in)
+  API       : Meta WhatsApp Business Cloud API — Graph v20.0
+  Date      : June 2026
+  Prepared  : Antigravity AI
+================================================================================
+
+
+WHAT YOU WILL ACHIEVE
+------------------------------------------------------------------------------
+  Feature                    Before (Green API)         After (Meta Cloud API)
+  ─────────────────────────────────────────────────────────────────────────────
+  QR Code Scanning           Required every time        NEVER needed again
+  Auto-send on Order         Yes                        Yes
+  PDF Invoice in WhatsApp    Yes                        Yes
+  Provider                   Third-party (risky)        Official Meta / Facebook
+  Cost                       Free                       Free (1,000 msgs/month)
+  Reliability                Moderate                   Enterprise Grade
+  Token Expiry               WhatsApp session           Permanent system token
+  ─────────────────────────────────────────────────────────────────────────────
+
+WHAT YOU NEED BEFORE STARTING:
+  - A Facebook account (personal or business)
+  - A phone number to register as WhatsApp Business
+  - Access to your server's api/config.php file
+  - About 20-30 minutes
+
+
+================================================================================
+  STEP 1 — CREATE META DEVELOPER APP
+================================================================================
+
+  1. Open your browser and go to:
+         https://developers.facebook.com
+
+  2. Click "Log In" at the top right corner.
+     Use your personal or business Facebook account.
+     (If you don't have one, create a free account at facebook.com first)
+
+  3. Click "My Apps" (top right corner)
+     Then click the green "Create App" button.
+
+  4. Choose App Type:
+     You will see options — Consumer, Business, Gaming.
+     Select "BUSINESS" and click Next.
+
+  5. Fill in App Details:
+     - App Name          : SS Crackers WhatsApp
+     - App Contact Email : your email address
+     - Business Account  : Skip or select your business (if available)
+
+     Click "Create App" to finish.
+
+
+================================================================================
+  STEP 2 — ADD WHATSAPP PRODUCT TO YOUR APP
+================================================================================
+
+  1. After the app is created, you'll see the app dashboard.
+     Scroll down to the "Add products to your app" section.
+     Find "WhatsApp" and click "Set Up".
+
+  2. Meta will show WhatsApp Business Platform terms.
+     Accept and continue.
+     You will be taken to the WhatsApp Getting Started page.
+
+  3. The left sidebar will now show: WhatsApp > API Setup
+     This is where all your credentials are.
+
+     *** KEEP THIS PAGE OPEN — you need it in Step 3 ***
+
+
+================================================================================
+  STEP 3A — COPY YOUR API CREDENTIALS
+================================================================================
+
+  On the "WhatsApp > API Setup" page, copy these 2 things:
+
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │  CREDENTIAL #1 — Temporary Access Token                                 │
+  │                                                                         │
+  │  What it looks like : EAAxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx...          │
+  │  (A very long string starting with EAA)                                 │
+  │                                                                         │
+  │  Where to find it   : API Setup page                                    │
+  │                       > "Temporary access token" field                  │
+  │                       > Click "Copy"                                    │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │  CREDENTIAL #2 — Phone Number ID                                        │
+  │                                                                         │
+  │  What it looks like : 123456789012345                                   │
+  │  (A numeric ID — NOT your actual phone number)                          │
+  │                                                                         │
+  │  Where to find it   : API Setup page                                    │
+  │                       > "Phone number ID" field                         │
+  │                       > Click "Copy"                                    │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+  !!! IMPORTANT: Phone Number ID is NOT the same as your phone number !!!
+  The Phone Number ID looks like: 123456789012345
+  Your phone number looks like:   +91 95855 58912
+  Copy the Phone Number ID (the numeric ID), NOT the phone number.
+
+  SAVE BOTH VALUES IN NOTEPAD before continuing.
+
+
+================================================================================
+  STEP 3B — ADD YOUR NUMBER AS TEST RECIPIENT
+================================================================================
+
+  Before Meta can send messages, your owner's WhatsApp number must
+  be verified as a test recipient.
+
+  1. On the API Setup page, scroll to "Send and receive messages" section.
+     You'll see a "To" field with a dropdown.
+
+  2. Click the dropdown > click "Manage phone number list"
+     Then click "Add phone number".
+
+  3. Enter the owner's WhatsApp number:
+         +91 95855 58912
+
+  4. WhatsApp will send a 6-digit OTP to that number.
+     Enter the OTP code on screen to verify.
+
+  ✓ The number is now a verified test recipient.
+
+  TIP: After adding, you can click "Send Message" on the API Setup page
+       to send a test WhatsApp message and confirm it works!
+
+
+================================================================================
+  STEP 4 — UPDATE config.php ON YOUR SERVER
+================================================================================
+
+  Open the file:  api/config.php
+  (via cPanel File Manager or FTP/FileZilla)
+
+  Find the WhatsApp section and update these 4 lines:
+
+  ─────────────────────────────────────────────────────────────────────────────
+  // ================================================
+  // WHATSAPP via META BUSINESS CLOUD API
+  // ================================================
+
+  define('META_WA_ACCESS_TOKEN',    'PASTE_YOUR_TOKEN_HERE');
+  //                                 ^^ Replace with your token from Step 3A
+
+  define('META_WA_PHONE_NUMBER_ID', 'PASTE_YOUR_PHONE_NUMBER_ID_HERE');
+  //                                 ^^ Replace with Phone Number ID from Step 3A
+
+  define('META_WA_TARGET_PHONE',    '919585558912');
+  //                                 ^^ This is already correct — no change needed
+
+  define('META_WA_ENABLED',         true);
+  //                                 ^^ Change from false to true
+  ─────────────────────────────────────────────────────────────────────────────
+
+  Save the file after making changes.
+
+  !!! WARNING: Temporary Token Expires in 24 Hours !!!
+  The token from Step 3A is temporary and expires after 24 hours.
+  You MUST complete Step 5 (Permanent Token) before going live.
+
+
+  HOW TO TEST:
+  ─────────────────────────────────────────────────────────────────────────────
+  1. Save the updated config.php on your server.
+  2. Open sscrackers.in, add products to cart, and place a test order.
+  3. Check the owner's WhatsApp (+91 95855 58912).
+  4. Within a few seconds, a message with full order details should arrive.
+  ─────────────────────────────────────────────────────────────────────────────
+
+
+================================================================================
+  STEP 5 — CREATE PERMANENT TOKEN (NEVER EXPIRES)
+================================================================================
+
+  !!! DO THIS BEFORE GOING LIVE — Token from Step 3 expires in 24 hours !!!
+
+  1. Go to:  https://business.facebook.com
+     Log in > Click "Settings" (gear icon in left sidebar)
+
+  2. In the left sidebar:
+     Users > System Users > Click "Add"
+     - Name : SS Crackers Bot
+     - Role : Admin
+     Click "Create System User"
+
+  3. Click on your new system user
+     Click "Assign Assets" > Select "Apps"
+     Choose your "SS Crackers WhatsApp" app
+     Enable "Full Control" > Save.
+
+  4. Click "Generate New Token"
+     - Select your app
+     - Check permission: whatsapp_business_messaging
+     - Click "Generate Token"
+
+     *** COPY AND SAVE THIS TOKEN IMMEDIATELY ***
+     (It will NOT be shown again)
+
+  5. Go back to api/config.php on your server.
+     Replace the temporary token with this new permanent token:
+
+     define('META_WA_ACCESS_TOKEN', 'NEW_PERMANENT_TOKEN_HERE');
+
+     Save the file. This token never expires!
+
+
+================================================================================
+  STEP 6 — GOING LIVE (OPTIONAL)
+================================================================================
+
+  Currently in "test mode" — you can only send messages to verified
+  test recipients (the numbers you added in Step 3B).
+
+  To send WhatsApp messages to ANY number (e.g., multiple staff):
+  1. Go to Meta Developer Console > Your App Dashboard
+  2. Click the "Go Live" button
+  3. In WhatsApp Settings, add your own phone number as a Business Number
+  4. Verify the number
+  5. Now you can send to any WhatsApp number worldwide.
+
+
+================================================================================
+  FINAL CHECKLIST
+================================================================================
+
+  [ ] Meta Developer App created with WhatsApp product added
+  [ ] Access Token copied from API Setup page
+  [ ] Phone Number ID copied (NOT the phone number itself)
+  [ ] Owner's number +91 95855 58912 added as test recipient and OTP verified
+  [ ] config.php updated with credentials and META_WA_ENABLED = true
+  [ ] Test order placed and WhatsApp message received successfully
+  [ ] Permanent System User token created at business.facebook.com
+  [ ] Permanent token replaced in config.php — never expires again!
+
+
+================================================================================
+  WHAT THE WHATSAPP MESSAGE WILL LOOK LIKE
+================================================================================
+
+  When a customer places an order, the owner's WhatsApp will receive:
+
+  ─────────────────────────────────────────────────────────────────────────────
+  🎉 *New Order — SS Crackers*
+  ━━━━━━━━━━━━━━━━━
+  📋 Order No: *ORD-0001*
+  📅 Date: 28 Jun 2026, 05:49 PM
+
+  👤 *Customer Details*
+    Name  : Ram Kumar
+    Phone : 9876543210
+    City  : Chennai – 600001
+    Addr  : 12, Anna Nagar, Chennai
+
+  🛒 *Order Items*
+    • Atom Bomb x2 = Rs.200
+    • Sky Shot x1 = Rs.150
+    • Flower Pot x3 = Rs.300
+
+  💰 *Grand Total: Rs.650*
+  ━━━━━━━━━━━━━━━━━
+  🔗 https://sscrackers.in/admin/
+  ─────────────────────────────────────────────────────────────────────────────
+
+
+================================================================================
+  QUICK REFERENCE — KEY URLS
+================================================================================
+
+  Meta Developers Portal    : https://developers.facebook.com
+  Meta Business Suite       : https://business.facebook.com
+  SS Crackers Admin Panel   : https://sscrackers.in/admin/
+  config.php location       : api/config.php (on your server)
+
+
+================================================================================
+  SUPPORT
+================================================================================
+
+  If you face any issues during setup:
+  - Double check that the Phone Number ID is correct (not the phone number)
+  - Make sure META_WA_ENABLED is set to "true" in config.php
+  - Confirm the owner's number is added as a test recipient (Step 3B)
+  - Check that the token has not expired (create permanent token in Step 5)
+
+================================================================================
+  END OF GUIDE — SS Crackers | sscrackers.in | June 2026
+================================================================================
